@@ -1,22 +1,122 @@
-# Multi-Modal RAG Pipeline: Audio, Image, & Video
+# Multi-Model RAG Multimedia Data Pipeline
 
-A simple Multi-Modal Retrieval-Augmented Generation (RAG) system that processes diverse data types—Audio (ASR), Images (OCR/VLM), and Video (VLM)—to provide grounded answers. Built with **LlamaIndex** for orchestration, **Faster-Whisper** for high-performance transcription, and **Pinecone** for scalable vector search.
+A unified, high-performance Retrieval-Augmented Generation (RAG) system designed to process, index, and query diverse multimedia data types, including **Audio**, **Images**, and **Video**.
 
 ---
 
 ## 🚀 Overview
 
-This project implements a unified pipeline to ingest and query multimedia data:
-- **Audio:** Transcribed using `Faster-Whisper` into searchable text chunks.
-- **Images/PDFs:** Processed via Multi-modal LLMs (VLMs) for visual understanding and OCR.
-- **Video:** Sampled for keyframes and analyzed using VLMs to capture temporal context.
-- **UI:** A sleek, interactive **Streamlit** dashboard for file uploads and chatting with your data.
+This project builds a robust pipeline for multimedia understanding, allowing users to "chat" with their data regardless of its format. By combining advanced Speech-to-Text, Computer Vision, and Large Language Models, the system extracts semantic meaning from various sources and stores it in a centralized vector database for intelligent retrieval.
+
+### Key Capabilities
+- **Audio Ingestion:** High-speed transcription using `Faster-Whisper`.
+- **Image Understanding:** OCR and visual context extraction via Vision-Language Models (VLMs).
+- **Video Analysis:** Keyframe sampling and temporal analysis for comprehensive video understanding.
+- **Unified Retrieval:** Context-aware querying across all media types using LlamaIndex and Pinecone.
+- **Interactive Dashboard:** A Streamlit-based UI for seamless data uploads and conversational interaction.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Orchestration:** [LlamaIndex](https://www.llamaindex.ai/) (Multi-modal Indexing)
-- **ASR (Speech-to-Text):** [Faster-Whisper](https://github.com/SYSTRAN/faster-whisper)
+- **Orchestration:** [LlamaIndex](https://www.llamaindex.ai/)
 - **Vector Database:** [Pinecone](https://www.pinecone.io/)
-- **VLM (Vision-Language Models):** GPT-4o, Claude 3.5 Sonnet, or Open-Source (Qwen2-VL)
+- **ASR (Speech-to-Text):** [Faster-Whisper](https://github.com/SYSTRAN/faster-whisper)
+- **VLM & LLMs:** GPT-4o, Claude 3.5 Sonnet, or Qwen2-VL
+- **Embeddings:** Hugging Face `sentence-transformers` (`all-MiniLM-L6-v2`)
 - **Frontend:** [Streamlit](https://streamlit.io/)
-- **Embeddings:** sentence-transformers form HF and HF apis fo llms 
+- **Language:** Python 3.12+
+- **Linting & Formatting:** [Ruff](https://beta.ruff.rs/)
+
+---
+
+## 📁 Project Structure
+
+```text
+├── data/                   # Multimedia storage (audio, images, video)
+├── prompts/                # System prompts for VLMs and LLMs
+├── specs/                  # Project specifications and architecture plans
+├── src/
+│   ├── pipeline/           # Core ingestion and retrieval logic
+│   └── utils/              # Helper functions (Pinecone, etc.)
+├── tests/                  # Automated test suite
+├── main.py                 # Application entry point
+├── pyproject.toml          # Ruff and project configuration
+└── requirements.txt        # Python dependencies
+```
+
+---
+
+## ⚙️ Setup & Installation
+
+### Prerequisites
+- Python 3.12.13
+- Pinecone API Key
+- Hugging Face Token (for embeddings/models)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd multi-model-rag-multimedia-data-pipeline
+   ```
+
+2. **Create and activate a virtual environment:**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # MacOS/Linux
+   # .venv\Scripts\activate  # Windows
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure environment variables:**
+   Create a `.env` file in the root directory:
+   ```env
+   PINECONE_API_KEY=your_pinecone_key
+   PINECONE_INDEX_NAME=multimodel-rag-system
+   OPENAI_API_KEY=your_openai_key
+   HF_TOKEN=your_huggingface_token
+   ```
+
+---
+
+## 🧪 Verification & Testing
+
+To verify the foundation setup:
+
+1. **Run the main verification script:**
+   ```bash
+   python main.py
+   ```
+
+2. **Run automated tests:**
+   ```bash
+   python -m pytest tests/test_foundation.py
+   ```
+
+3. **Check linting and formatting:**
+   ```bash
+   ruff check .
+   ruff format --check .
+   ```
+
+---
+
+## 🗺️ Roadmap
+
+- [x] **Phase 1: Foundation & Core Architecture** (Complete)
+- [ ] **Phase 2: Audio Ingestion Pipeline** (Transcription & Indexing)
+- [ ] **Phase 3: Visual & Temporal Ingestion Pipeline** (Image/Video VLM)
+- [ ] **Phase 4: Retrieval & Query Engine** (Unified Interface)
+- [ ] **Phase 5: Interactive Dashboard** (Streamlit UI)
+- [ ] **Phase 6: Optimization & Evaluation** (Fine-tuning)
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

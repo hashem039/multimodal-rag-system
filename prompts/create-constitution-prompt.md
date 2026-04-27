@@ -1,4 +1,4 @@
-We are writing AgentClinic, a place for AI agents to get relief from their humans. Look in the README.md for input from stakeholders.
+Look in the @README.md for input from stakeholders.
 Let's create the "constitution" in the a specs directory:
 - 'mission.md'
 - 'tech-stack.md'
