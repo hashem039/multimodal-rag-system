@@ -9,5 +9,6 @@ torch==2.2.2
 numpy==1.26.4
 transformers==4.57.6
 faster-whisper
+llama-index-vector-stores-pinecone
 streamlit
 pytest
