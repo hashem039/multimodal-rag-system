@@ -89,28 +89,17 @@ This project builds a robust pipeline for multimedia understanding, allowing use
 
 ## 🧪 Verification & Testing
 
-To run the unified query pipeline:
+### Interactive Dashboard (Recommended)
+To launch the interactive multi-modal dashboard:
+```bash
+streamlit run app.py
+```
+
+### CLI Querying
+To run the unified query pipeline via CLI:
 ```bash
 python scripts/query_pipeline.py "Your query here"
 ```
-
-To verify the foundation setup:
-
-1. **Run the main verification script:**
-   ```bash
-   python main.py
-   ```
-
-2. **Run automated tests:**
-   ```bash
-   python -m pytest tests/test_foundation.py
-   ```
-
-3. **Check linting and formatting:**
-   ```bash
-   ruff check .
-   ruff format --check .
-   ```
 
 ---
 
@@ -120,7 +109,7 @@ To verify the foundation setup:
 - [x] **Phase 2: Audio Ingestion Pipeline**
 - [x] **Phase 3: Visual & Temporal Ingestion Pipeline**
 - [x] **Phase 4: Retrieval & Query Engine**
-- [ ] **Phase 5: Interactive Dashboard**
+- [x] **Phase 5: Interactive Dashboard**
 - [ ] **Phase 6: Optimization & Evaluation**
 
 ---
