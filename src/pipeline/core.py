@@ -1,3 +1,4 @@
+import os
 # from llama_index.llms.openai import OpenAI # Placeholder for future LLM integration
 from dotenv import load_dotenv
 from llama_index.core import Settings
@@ -11,15 +12,23 @@ def init_settings():
     print("Initializing LlamaIndex Settings...")
 
     # Setting up the embedding model
-    # BAAI/bge-large-en-v1.5 has 1024 dimensions
     Settings.embed_model = HuggingFaceEmbedding(
         model_name="BAAI/bge-large-en-v1.5"
     )
 
-    # Placeholder for LLM - can be configured via environment
-    # Settings.llm = OpenAI(model="gpt-4o")
+    # Allow LLM configuration via environment
+    llm_provider = os.getenv("LLM_PROVIDER", "openai").lower()
+    if llm_provider == "openai":
+        from llama_index.llms.openai import OpenAI
+        Settings.llm = OpenAI(model=os.getenv("OPENAI_MODEL", "gpt-4o"))
+    elif llm_provider == "anthropic":
+        from llama_index.llms.anthropic import Anthropic
+        model = os.getenv(
+            "ANTHROPIC_MODEL", "claude-3-5-sonnet-20240620"
+        )
+        Settings.llm = Anthropic(model=model)
 
-    print("Settings initialized successfully.")
+    print(f"Settings initialized with {llm_provider.upper()} and embedding model.")
 
 
 if __name__ == "__main__":
