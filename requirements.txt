@@ -12,3 +12,6 @@ faster-whisper
 llama-index-vector-stores-pinecone
 streamlit
 pytest
+opencv-python
+Pillow
+huggingface_hub
