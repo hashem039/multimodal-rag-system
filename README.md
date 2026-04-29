@@ -11,9 +11,9 @@ This project builds a robust pipeline for multimedia understanding, allowing use
 ### Key Capabilities
 - **Audio Ingestion:** High-speed transcription using `Faster-Whisper`.
 - **Image Understanding:** OCR and visual context extraction via Vision-Language Models (VLMs).
-- **Video Analysis:** Keyframe sampling and temporal analysis for comprehensive video understanding.
-- **Unified Retrieval:** Context-aware querying across all media types using LlamaIndex and Pinecone.
-- **Interactive Dashboard:** A Streamlit-based UI for seamless data uploads and conversational interaction.
+- **Video Analysis:** Keyframe sampling and temporal analysis for video understanding.
+- **Unified Retrieval:** Weighted multi-modal retrieval across all media types using LlamaIndex.
+- **Interactive Querying:** Natural language interface for cross-modal context synthesis.
 
 ---
 
@@ -79,13 +79,20 @@ This project builds a robust pipeline for multimedia understanding, allowing use
    ```env
    PINECONE_API_KEY=your_pinecone_key
    PINECONE_INDEX_NAME=multimodel-rag-system
+   LLM_PROVIDER=openai # or 'anthropic'
    OPENAI_API_KEY=your_openai_key
+   ANTHROPIC_API_KEY=your_anthropic_key
    HF_TOKEN=your_huggingface_token
    ```
 
 ---
 
 ## 🧪 Verification & Testing
+
+To run the unified query pipeline:
+```bash
+python scripts/query_pipeline.py "Your query here"
+```
 
 To verify the foundation setup:
 
@@ -109,12 +116,12 @@ To verify the foundation setup:
 
 ## 🗺️ Roadmap
 
-- [x] **Phase 1: Foundation & Core Architecture** (Complete)
-- [ ] **Phase 2: Audio Ingestion Pipeline** (Transcription & Indexing)
-- [ ] **Phase 3: Visual & Temporal Ingestion Pipeline** (Image/Video VLM)
-- [ ] **Phase 4: Retrieval & Query Engine** (Unified Interface)
-- [ ] **Phase 5: Interactive Dashboard** (Streamlit UI)
-- [ ] **Phase 6: Optimization & Evaluation** (Fine-tuning)
+- [x] **Phase 1: Foundation & Core Architecture**
+- [x] **Phase 2: Audio Ingestion Pipeline**
+- [x] **Phase 3: Visual & Temporal Ingestion Pipeline**
+- [x] **Phase 4: Retrieval & Query Engine**
+- [ ] **Phase 5: Interactive Dashboard**
+- [ ] **Phase 6: Optimization & Evaluation**
 
 ---
 
