@@ -7,17 +7,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class VLMHelper:
-    def __init__(self, model_name: str = "Qwen/Qwen2-VL-7B-Instruct"):
+    def __init__(self, model_name: str = "nlpconnect/vit-gpt2-image-captioning"):
         """
         Initializes the VLM Helper using Hugging Face Inference API directly via requests.
         """
         self.token = os.getenv("HF_TOKEN")
-        if not self.token:
-            # We don't raise error here to allow initialization in tests where it might be mocked
-            pass
         self.model_name = model_name
 
-    def describe_image(self, image: Image.Image, prompt: str = "Describe this image in detail.") -> str:
+    def describe_image(self, image: Image.Image, prompt: str = "Describe this image.") -> str:
         """
         Sends an image to the VLM and returns a text description.
         """
@@ -34,34 +31,31 @@ class VLMHelper:
         headers = {"Authorization": f"Bearer {self.token}"}
 
         import io
-        import base64
-        
         buffered = io.BytesIO()
         image.save(buffered, format="JPEG")
-        img_str = base64.b64encode(buffered.getvalue()).decode()
-
-        # Payload structure for many multi-modal models on HF Inference API
-        payload = {
-            "inputs": {
-                "image": img_str,
-                "text": prompt
-            }
-        }
+        image_data = buffered.getvalue()
 
         try:
-            response = requests.post(API_URL, headers=headers, json=payload, timeout=30)
+            # Try simple data payload first
+            response = requests.post(API_URL, headers=headers, data=image_data, timeout=30)
             
             if response.status_code != 200:
-                return f"Error from VLM API: {response.status_code} - {response.text}"
+                # Try JSON payload as fallback
+                import base64
+                img_str = base64.b64encode(image_data).decode()
+                payload = {"inputs": img_str}
+                response = requests.post(API_URL, headers=headers, json=payload, timeout=30)
+                
+            if response.status_code != 200:
+                return f"Error from VLM API: {response.status_code} - {response.text[:100]}"
                 
             result = response.json()
             if isinstance(result, list) and len(result) > 0:
-                # Some models return a list of results
                 if isinstance(result[0], dict):
-                    return result[0].get("generated_text", str(result[0]))
+                    return result[0].get("generated_text", result[0].get("caption", str(result[0])))
                 return str(result[0])
             elif isinstance(result, dict):
-                return result.get("generated_text", str(result))
+                return result.get("generated_text", result.get("caption", str(result)))
             return str(result)
         except Exception as e:
             return f"VLM API Exception: {str(e)}"

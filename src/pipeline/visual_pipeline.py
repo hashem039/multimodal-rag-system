@@ -31,6 +31,10 @@ class VisualPipeline:
         image = self.processor.process_image(image_path)
         description = self.vlm.describe_image(image)
         
+        if "Error from VLM API" in description:
+            print(f"Warning: VLM failed for {image_path}. Using placeholder.")
+            description = f"Image from {os.path.basename(image_path)}"
+
         file_name = os.path.basename(image_path)
         node = TextNode(
             text=description,
@@ -56,6 +60,9 @@ class VisualPipeline:
         for frame in frames:
             description = self.vlm.describe_image(frame["image"], prompt="Describe the content of this video frame briefly.")
             
+            if "Error from VLM API" in description:
+                description = f"Video frame from {file_name} at {frame['timestamp']}s"
+
             node = TextNode(
                 text=description,
                 id_=f"{file_name}_frame_{frame['frame_index']}",

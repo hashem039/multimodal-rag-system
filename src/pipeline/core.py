@@ -11,9 +11,9 @@ def init_settings():
     print("Initializing LlamaIndex Settings...")
 
     # Setting up the embedding model
-    # all-MiniLM-L6-v2 has 384 dimensions
+    # BAAI/bge-large-en-v1.5 has 1024 dimensions
     Settings.embed_model = HuggingFaceEmbedding(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+        model_name="BAAI/bge-large-en-v1.5"
     )
 
     # Placeholder for LLM - can be configured via environment
