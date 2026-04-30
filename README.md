@@ -34,13 +34,15 @@ This project builds a robust pipeline for multimedia understanding, allowing use
 
 ```text
 ├── data/                   # Multimedia storage (audio, images, video)
-├── prompts/                # System prompts for VLMs and LLMs
-├── specs/                  # Project specifications and architecture plans
+├── prompts/                # Prompt templates for ingestion and validation
+├── scripts/                # Standalone ingestion and query scripts
+├── specs/                  # Phase-based specifications and roadmaps
 ├── src/
-│   ├── pipeline/           # Core ingestion and retrieval logic
-│   └── utils/              # Helper functions (Pinecone, etc.)
-├── tests/                  # Automated test suite
-├── main.py                 # Application entry point
+│   ├── pipeline/           # Core logic (audio, visual, query engines)
+│   └── utils/              # Processors (ASR, VLM) and database helpers
+├── tests/                  # Automated test suite (Pytest)
+├── app.py                  # Streamlit dashboard entry point
+├── main.py                 # CLI application entry point
 ├── pyproject.toml          # Ruff and project configuration
 └── requirements.txt        # Python dependencies
 ```

@@ -1,13 +1,13 @@
-# Python Version: 3.12.13
+
 llama-index
 llama-index-embeddings-huggingface
 pinecone
 python-dotenv
 ruff
 sentence-transformers
-torch==2.2.2
-numpy==1.26.4
-transformers==4.57.6
+torch
+numpy
+transformers
 faster-whisper
 llama-index-vector-stores-pinecone
 llama-index-llms-huggingface-api
