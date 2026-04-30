@@ -1,34 +1,30 @@
 import os
-# from llama_index.llms.openai import OpenAI # Placeholder for future LLM integration
+
 from dotenv import load_dotenv
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
 
 load_dotenv()
 
 
 def init_settings():
-    """Initializes global LlamaIndex settings."""
-    print("Initializing LlamaIndex Settings...")
+    """Initializes global LlamaIndex settings using Hugging Face."""
+    print("Initializing LlamaIndex Settings with Hugging Face...")
 
     # Setting up the embedding model
-    Settings.embed_model = HuggingFaceEmbedding(
-        model_name="BAAI/bge-large-en-v1.5"
-    )
+    Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-large-en-v1.5")
 
-    # Allow LLM configuration via environment
-    llm_provider = os.getenv("LLM_PROVIDER", "openai").lower()
-    if llm_provider == "openai":
-        from llama_index.llms.openai import OpenAI
-        Settings.llm = OpenAI(model=os.getenv("OPENAI_MODEL", "gpt-4o"))
-    elif llm_provider == "anthropic":
-        from llama_index.llms.anthropic import Anthropic
-        model = os.getenv(
-            "ANTHROPIC_MODEL", "claude-3-5-sonnet-20240620"
-        )
-        Settings.llm = Anthropic(model=model)
+    # Use Hugging Face Inference API for LLM
+    model_name = os.getenv("HF_LLM_MODEL", "meta-llama/Meta-Llama-3-8B-Instruct")
+    token = os.getenv("HF_TOKEN")
 
-    print(f"Settings initialized with {llm_provider.upper()} and embedding model.")
+    if not token:
+        print("Warning: HF_TOKEN not found in environment variables.")
+
+    Settings.llm = HuggingFaceInferenceAPI(model_name=model_name, token=token)
+
+    print(f"Settings initialized with HF Model: {model_name}")
 
 
 if __name__ == "__main__":

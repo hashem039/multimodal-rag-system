@@ -10,6 +10,7 @@ numpy==1.26.4
 transformers==4.57.6
 faster-whisper
 llama-index-vector-stores-pinecone
+llama-index-llms-huggingface-api
 streamlit
 pytest
 opencv-python

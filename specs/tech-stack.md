@@ -4,9 +4,9 @@
 - **Orchestration:** LlamaIndex
 - **Vector Database:** Pinecone
 - **ASR (Speech-to-Text):** Faster-Whisper
-- **Vision-Language Models (VLM):** GPT-4o, Claude 3.5 Sonnet, or Qwen2-VL
+- **Vision-Language Models (VLM):** Hugging Face (e.g., BLIP, Qwen2-VL)
 - **Embeddings:** Hugging Face `sentence-transformers`
-- **LLM API Provider:** Hugging Face APIs
+- **LLM API Provider:** Hugging Face Inference API
 
 ## Frontend
 - **Framework:** Streamlit

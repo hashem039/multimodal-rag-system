@@ -31,9 +31,13 @@ class VisualPipeline:
         image = self.processor.process_image(image_path)
         description = self.vlm.describe_image(image)
         
-        if "Error from VLM API" in description:
-            print(f"Warning: VLM failed for {image_path}. Using placeholder.")
-            description = f"Image from {os.path.basename(image_path)}"
+        if "Error from VLM API" in description or "VLM API Exception" in description:
+            print(f"Warning: VLM failed for {image_path}. API Response: {description}")
+            # Keep a bit more info in the placeholder for debugging
+            description = f"Image from {os.path.basename(image_path)} (VLM Error: {description[:50]})"
+        elif "Error:" in description:
+             print(f"Warning: VLM returned generic error: {description}")
+             description = f"Image from {os.path.basename(image_path)} (Error)"
 
         file_name = os.path.basename(image_path)
         node = TextNode(
@@ -57,7 +61,8 @@ class VisualPipeline:
         file_name = os.path.basename(video_path)
         
         print(f"Extracted {len(frames)} frames. Generating descriptions...")
-        for frame in frames:
+        for i, frame in enumerate(frames):
+            print(f"Processing frame {i+1}/{len(frames)} (timestamp: {frame['timestamp']:.2f}s)...")
             description = self.vlm.describe_image(frame["image"], prompt="Describe the content of this video frame briefly.")
             
             if "Error from VLM API" in description:

@@ -24,13 +24,13 @@ class VisualProcessor:
         if video_fps == 0:
             raise ValueError(f"Could not determine FPS for video: {video_path}")
 
-        hop = round(video_fps / fps)
+        hop = max(1, round(video_fps / fps))
         frames = []
         count = 0
         success = True
 
-        while success:
-            success, frame = cap.get(cv2.CAP_PROP_POS_FRAMES), cap.read()[1]
+        while True:
+            success, frame = cap.read()
             if not success:
                 break
             
