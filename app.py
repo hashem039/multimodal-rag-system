@@ -112,7 +112,7 @@ if uploaded_file is not None:
     # Preview
     ext = os.path.splitext(uploaded_file.name)[1].lower()
     if ext in [".jpg", ".png"]:
-        st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
+        st.image(uploaded_file, caption="Uploaded Image", width="stretch")
     elif ext == ".mp4":
         st.video(uploaded_file)
     elif ext in [".mp3", ".wav"]:
