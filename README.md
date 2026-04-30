@@ -22,7 +22,7 @@ This project builds a robust pipeline for multimedia understanding, allowing use
 - **Orchestration:** [LlamaIndex](https://www.llamaindex.ai/)
 - **Vector Database:** [Pinecone](https://www.pinecone.io/)
 - **ASR (Speech-to-Text):** [Faster-Whisper](https://github.com/SYSTRAN/faster-whisper)
-- **VLM & LLMs:** GPT-4o, Claude 3.5 Sonnet, or Qwen2-VL
+- **VLM & LLMs:** Hugging Face Inference API (Meta-Llama-3, BLIP, etc.)
 - **Embeddings:** Hugging Face `sentence-transformers` (`all-MiniLM-L6-v2`)
 - **Frontend:** [Streamlit](https://streamlit.io/)
 - **Language:** Python 3.12+

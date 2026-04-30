@@ -6,7 +6,7 @@
 - **ASR (Speech-to-Text):** Faster-Whisper
 - **Vision-Language Models (VLM):** Hugging Face (e.g., BLIP, Qwen2-VL)
 - **Embeddings:** Hugging Face `sentence-transformers`
-- **LLM API Provider:** Hugging Face APIs (default), OpenAI, or Anthropic
+- **LLM API Provider:** Hugging Face Inference API
 
 ## Frontend
 - **Framework:** Streamlit
