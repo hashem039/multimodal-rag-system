@@ -33,6 +33,14 @@ def init_pinecone_index(index_name: str, dimension: int = 384, metric: str = "co
     return pc.Index(index_name)
 
 
+def delete_all_vectors(index_name: str):
+    """Deletes all vectors in the specified index."""
+    pc = get_pinecone_client()
+    index = pc.Index(index_name)
+    index.delete(delete_all=True)
+    print(f"All vectors deleted from index: {index_name}")
+
+
 if __name__ == "__main__":
     # For verification testing
     index_name = os.getenv("PINECONE_INDEX_NAME", "multimedia-rag")

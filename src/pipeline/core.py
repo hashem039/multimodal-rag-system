@@ -27,6 +27,15 @@ def init_settings():
             "ANTHROPIC_MODEL", "claude-3-5-sonnet-20240620"
         )
         Settings.llm = Anthropic(model=model)
+    elif llm_provider == "huggingface":
+        from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
+        model_name = os.getenv(
+            "HF_LLM_MODEL", "meta-llama/Meta-Llama-3-8B-Instruct"
+        )
+        Settings.llm = HuggingFaceInferenceAPI(
+            model_name=model_name,
+            token=os.getenv("HF_TOKEN")
+        )
 
     print(f"Settings initialized with {llm_provider.upper()} and embedding model.")
 

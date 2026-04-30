@@ -7,12 +7,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class VLMHelper:
-    def __init__(self, model_name: str = "nlpconnect/vit-gpt2-image-captioning"):
+    def __init__(self, model_name: str = None):
         """
-        Initializes the VLM Helper using Hugging Face Inference API directly via requests.
+        Initializes the VLM Helper using Hugging Face Inference API.
         """
         self.token = os.getenv("HF_TOKEN")
-        self.model_name = model_name
+        self.model_name = model_name or os.getenv(
+            "HF_VLM_MODEL", "Salesforce/blip-image-captioning-large"
+        )
 
     def describe_image(self, image: Image.Image, prompt: str = "Describe this image.") -> str:
         """
