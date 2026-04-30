@@ -61,7 +61,8 @@ class VisualPipeline:
         file_name = os.path.basename(video_path)
         
         print(f"Extracted {len(frames)} frames. Generating descriptions...")
-        for frame in frames:
+        for i, frame in enumerate(frames):
+            print(f"Processing frame {i+1}/{len(frames)} (timestamp: {frame['timestamp']:.2f}s)...")
             description = self.vlm.describe_image(frame["image"], prompt="Describe the content of this video frame briefly.")
             
             if "Error from VLM API" in description:
