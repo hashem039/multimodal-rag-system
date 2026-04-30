@@ -79,10 +79,9 @@ This project builds a robust pipeline for multimedia understanding, allowing use
    ```env
    PINECONE_API_KEY=your_pinecone_key
    PINECONE_INDEX_NAME=multimodel-rag-system
-   LLM_PROVIDER=openai # or 'anthropic'
-   OPENAI_API_KEY=your_openai_key
-   ANTHROPIC_API_KEY=your_anthropic_key
    HF_TOKEN=your_huggingface_token
+   HF_LLM_MODEL=meta-llama/Meta-Llama-3-8B-Instruct
+   HF_VLM_MODEL=Salesforce/blip-image-captioning-large
    ```
 
 ---
